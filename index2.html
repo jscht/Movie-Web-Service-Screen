@@ -8,38 +8,33 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const Btn = (props) => { 
-        // console.log(props) // 들고온 props를 "직접" 넣어야 작동을 하게된다.
+        // console.log(props) 
+				// 들고온 props를 "직접" 넣어야 작동을 하게된다.
         console.log(props.text, "was rendered");
-        // Continue는 바뀌는 부분이 없는데
-        // 어떤 부분이 Btn Continue를 다시 그리는 것일까?
-
-        // react memo... 09:50
         
         return (
             <button 
                 style={props.style}
-                onClick={props.onClick} // 여기에 있는 속성의 onClick은 이벤트리스너와 이름은 같지만
-            >                           {/* 이벤트리스너가 아닌 그저 prop일 뿐이다. 잘 사용하자. */}
+                onClick={props.onClick}
+            > // 여기에 있는 속성의 onClick은 이벤트리스너와 이름은 같지만 
+							//이벤트리스너가 아닌 그저 prop이다.
                 {props.text}
             </button>
         )
     }
+    const MemorizedBtn = React.memo(Btn)
+
     function App() {
       const [value, setValue] = React.useState("Save Changes")
       const changeValue = () => setValue("Revert Changes")
       return (
         <div>
-          <Btn 
+          <MemorizedBtn 
             style={{backgroundColor:"green"}} 
             text={value} 
             onClick={changeValue} 
           />
-          {/* onClick을 커스텀 컴포넌트에 넣는다면 이건 이벤트리스너가 아닌 하나의 prop이다 */}
-          
-          {/* 여기에 있는 onClick은 이름은 이벤트리스너와 같을지라도 전혀 같은게 아니다. */}
-          {/* 직접적으로 style이 button에 달리지 않는다. */}
-          {/* 내가 prop들을 가져가서 적용을 시켜야만 한다. */}
-          <Btn text="continue" />
+          <MemorizedBtn text="continue" />
         </div>
       );
     };
