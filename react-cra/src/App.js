@@ -30,6 +30,7 @@ function App() {
   useEffect(() => {
     console.log("I run when 'keyword & value' changes.")
   }, [keyword, value]);
+  // 둘 중에 하나라도 변화가 일어나면 이 코드가 실행된다.
 
   return (
     <div className="App">
