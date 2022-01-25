@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 import styles from "./Button.module.css";
 
-function Button({text}){
+function Button(props){
     return(
-        <button className={styles.btn}>
-            {text}
+        <button 
+            className={styles.btn}
+            onClick={props.click}
+        >
+            {props.text}
         </button>
     )
 }
