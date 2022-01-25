@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const Btn = (props) => { 
+        // console.log(props) 
+				// 들고온 props를 "직접" 넣어야 작동을 하게된다.
+        console.log(props.text, "was rendered");
+        
+        return (
+            <button 
+                style={props.style}
+                onClick={props.onClick}
+            > // 여기에 있는 속성의 onClick은 이벤트리스너와 이름은 같지만 
+	      //이벤트리스너가 아닌 그저 prop이다.
+                {props.text}
+            </button>
+        )
+    }
+    const MemorizedBtn = React.memo(Btn)
+
+    function App() {
+      const [value, setValue] = React.useState("Save Changes")
+      const changeValue = () => setValue("Revert Changes")
+      return (
+        <div>
+          <MemorizedBtn 
+            style={{backgroundColor:"green"}} 
+            text={value} 
+            onClick={changeValue} 
+          />
+          <MemorizedBtn text="continue" />
+        </div>
+      );
+    };
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

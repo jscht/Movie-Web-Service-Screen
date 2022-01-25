@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    const Btn = ({text, fontSize=20}) => { 
+        // console.log(props) // 들고온 props를 "직접" 넣어야 작동을 하게된다.
+        // console.log(props.text, "was rendered");
+
+				// {prop명} 을 사용하여 가져올 수 있다.
+				// {prop명 = 값} 을 통해 기본 값을 넣어줄 수 있다.
+
+        // 실제론 props object를 받아와서 활용하는 짧은 코드를 선호한다.
+
+        return (
+            <button
+              style={{
+                backgroundColor: "#1A73E8",
+                color: "#FFFFFF",
+                margin: "0px 8px",
+                padding: "9px 15px",
+                border: "0px solid",
+                borderRadius: 7, // Babel용 css코드
+                fontSize: fontSize // fontSize 이름이 같다면 fontSize만 써도 된다.
+              }}
+            >
+              {text}
+            </button>
+        )
+    }
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    }
+    function App() {
+      return (
+        <div>
+          <Btn text="Save Changes" fontSize={18} />
+          <Btn text="Continue" />
+        </div>
+      );
+    };
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function MinutesToHours() {
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value)
+      };
+      const reset = () => setAmount();
+      const onInvert = () => {
+        //setInverted(!inverted);
+        reset();
+        setInverted((current) => !current); // 최근 state를 가져오는 방법
+      };
+      return (
+        <div>
+          <label htmlFor="minutes">Minutes</label>
+          <input 
+            value={inverted ? amount*60 : amount+""} // input의 value를 연결시켜주는 이유는 input값을 외부에서도 수정해주기 위해서.
+            id="minutes" 
+            placeholder="Minutes" 
+            type="number"
+            onChange={onChange}
+            disabled={inverted}
+          /><br/>
+          <label htmlFor="hours">Hours</label>
+          <input 
+            value={inverted ? amount+"" : Math.round(amount/60)}
+            id="hours" 
+            placeholder="Hours" 
+            type="number"
+            onChange={onChange}
+            disabled={!inverted}
+          /><br/>
+          <button onClick={reset}>reset</button>
+          <button onClick={onInvert}>
+            {inverted ? "turn back" : "invert"}
+          </button>
+        </div>
+      );
+    }
+    function CmToInch() {
+      const [len, setLen] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const reset = () => setLen()
+      const inverting = () => {
+        reset();
+        setInverted((current) => !current)
+      }
+      const onChange = (event) => {
+        setLen(event.target.value)
+      }
+      return (
+        // cm/inch 변환기
+        <div>
+          <label htmlFor="cm">Cm</label>
+          <input 
+            onChange={onChange}
+            value={inverted ? (len*2.54) : len+""}
+            id="cm" 
+            type="number" 
+            placeholder="Cm"
+            disabled={inverted}
+          /><br/>
+          <label htmlFor="inch">Inch</label>
+          <input 
+            onChange={onChange}
+            value={inverted ? len+"" : (len/2.54).toFixed(6)}
+            id="inch" 
+            type="number" 
+            placeholder="Inch"
+            disabled={!inverted}
+          /><br/>
+          <button onClick={reset}>reset</button>
+          <button onClick={inverting}>invert</button>
+        </div>
+      );
+    }
+    function App() {
+      const [index, setIndex] = React.useState("?"); // 나중에 ?로 바꾸기
+      const [inverted, setInverted] = React.useState(false);
+      const onSelect = (event) => {
+        setIndex(event.target.value)
+      }
+      return (
+        <div>
+          <h1 className="h1">Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="?" disabled>Select your Unit</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Cm & Inch</option>
+          </select>
+          <hr/>
+          <div>
+            {/* 시/분 변환기에서 cm/inch 변환기로 전환할 수 있도록 만들자 */}
+            {/* state가 변경될 때 마다 리랜더링된다. 새로고침됨. */}
+            { index === "?" ? <h3>Select a unit converter at the top</h3> : null }
+            { index === "0" ? <MinutesToHours  /> : null }
+            { index === "1" ? <CmToInch /> : null }
+          </div>
+        </div>
+      );
+    };
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
