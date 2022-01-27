@@ -10,13 +10,16 @@ function App() {
     if(toDoVal === "") {
       return;
     }
-    setToDos((currentArray) => [toDoVal, ...currentArray]);
-    // 배열 원소 위치를 바꾸면 원하는 위치에 저장시킬 수 있다.
+    //setToDos((currentArray) => [toDoVal, ...currentArray]);
+    setToDos((currentArray) => [...currentArray, toDoVal]);
+    // 함수를 보낼 때 react.js는 함수의 첫 번째 argument로 현재 state를 보낸다.
+    // 위의 코드는 현재 toDos배열을 가져와서 새로운 toDos의 array로 return하고 있다.
     setToDoVal("");
-    console.log(toDos);
-    // 여기서는 바로 추가되지 않는다
   };
-  
+  const delToDo = (index) => {
+    //console.log(index)
+    setToDos(toDos.filter((item, toDoIndex) => index !== toDoIndex))
+  };
   return (
     <div className="App">
       <h1>My To Dos ({toDos.length})</h1>
@@ -29,6 +32,16 @@ function App() {
         />
         <button onClick={onSubmit}>Add To Do</button>
       </form>
+      <hr/>
+      <ul>
+        {toDos.map((item, index) => (
+          <li key={index}>
+            {item}&emsp;
+            <button onClick={() => delToDo(index)}>❌</button>
+          </li>
+        ))}
+      </ul>
+      {/* 같은 컴포넌트의 list를 랜더링할 때 key라는 prop을 넣어줘야 한다. */}
     </div>
   );
 }
