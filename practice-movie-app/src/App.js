@@ -1,4 +1,5 @@
 import { useState } from "react";
+import List from "./List";
 
 function App() {
   const [toDoVal, setToDoVal] = useState("");
@@ -35,13 +36,14 @@ function App() {
       <hr/>
       <ul>
         {toDos.map((item, index) => (
-          <li key={index}>
-            {item}&emsp;
-            <button onClick={() => delToDo(index)}>❌</button>
-          </li>
+          <List index={index} item={item} del={delToDo}/>
+
+          // <li key={index}>
+          //    {item}&emsp;
+          //    <button onClick={() => delToDo(index)}>❌</button>
+          // </li>
         ))}
       </ul>
-      {/* 같은 컴포넌트의 list를 랜더링할 때 key라는 prop을 넣어줘야 한다. */}
     </div>
   );
 }
