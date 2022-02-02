@@ -24,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <h1>My To Dos ({toDos.length})</h1>
+      adsasd
       <form onSubmit={onSubmit}>
         <input 
           onChange={onChange} 
@@ -37,7 +38,7 @@ function App() {
       <ul>
         {toDos.map((item, index) => (
           <List index={index} item={item} del={delToDo}/>
-
+          
           // <li key={index}>
           //    {item}&emsp;
           //    <button onClick={() => delToDo(index)}>❌</button>
