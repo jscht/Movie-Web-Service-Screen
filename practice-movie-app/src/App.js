@@ -42,28 +42,6 @@ function App() {
             </select>
           </div>
         )}
-      <h1>My To Dos ({toDos.length})</h1>
-      
-      <form onSubmit={onSubmit}>
-        <input 
-          onChange={onChange} 
-          value={toDoVal} 
-          type="text" 
-          placeholder="Write your to do..." 
-        />
-        <button onClick={onSubmit}>Add To Do</button>
-      </form>
-      <hr/>
-      <ul>
-        {toDos.map((item, index) => (
-          <List index={index} item={item} del={delToDo}/>
-          
-          // <li key={index}>
-          //    {item}&emsp;
-          //    <button onClick={() => delToDo(index)}>❌</button>
-          // </li>
-        ))}
-      </ul>
     </div>
   );
 }
