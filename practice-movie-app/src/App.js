@@ -1,5 +1,4 @@
 import { useState } from "react";
-import List from "./List";
 
 function App() {
   const [toDoVal, setToDoVal] = useState("");
@@ -36,12 +35,10 @@ function App() {
       <hr/>
       <ul>
         {toDos.map((item, index) => (
-          <List index={index} item={item} del={delToDo}/>
-
-          // <li key={index}>
-          //    {item}&emsp;
-          //    <button onClick={() => delToDo(index)}>❌</button>
-          // </li>
+          <li key={index}>
+            {item}&emsp;
+            <button onClick={() => delToDo(index)}>❌</button>
+          </li>
         ))}
       </ul>
     </div>
