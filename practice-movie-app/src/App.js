@@ -17,15 +17,21 @@ function App() {
   }, []);
 
   // 사용자 입력 달러 state
-  const [dollars, setDollars] = useState(1);
+  const [dollars, setDollars] = useState("");
   const inputDollars = (event) => {
     setDollars(event.target.value)
   }
 
   // 코인 변환, 단위 state
-  const [cng, setCng] = useState(1);
+  const [cng, setCng] = useState({
+    val: 1,
+    selc: false
+  });
   const onCng = (event) => {
-    setCng(event.target.value)
+    setCng({
+      val: event.target.value,
+      selc: true
+    })
   }
   
   return (
@@ -42,6 +48,7 @@ function App() {
               USD</label>
             <br/>
             <select onChange={onCng}>
+              <option disabled={cng.selc}>Select your Unit</option>
               {coins.map((coin, index) =>
               // 이 coin은 coins array안에 있는 각각의 coin을 의미한다.
                 <option key={index} value={coin.quotes.USD.price}>
@@ -49,7 +56,7 @@ function App() {
                 </option>
               )}
             </select>
-            <h3>{dollars/cng}</h3>
+            <h3>{dollars/cng.val}</h3>
           </div>
         )}
     </div>
