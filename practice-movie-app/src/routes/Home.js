@@ -16,7 +16,7 @@ function Home() {
   useEffect(() => {
     getMovies();
   }, []);
-  console.log(movies);
+  //console.log(movies);
 
   return (
     <div className="App">
@@ -27,6 +27,7 @@ function Home() {
           {movies.map((movie) => (
             <Movie
               key={movie.id}
+              id={movie.id}
               // 여기의 속성명은 내가 원하는 대로 지을 수 있지만 그대로 가져와서 썼다.
               title_long={movie.title_long}
               medium_cover_image={movie.medium_cover_image}

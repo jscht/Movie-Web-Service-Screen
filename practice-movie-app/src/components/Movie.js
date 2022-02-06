@@ -5,7 +5,7 @@ function Movie(props) {
   return (
     <div>
       <h2>
-        <Link to="/movie">{props.title_long}</Link>
+        <Link to={`/movie/${props.id}`}>{props.title_long}</Link>
       </h2>
       <img src={props.medium_cover_image} alt={props.title_long} />
       <ul>
@@ -20,6 +20,7 @@ function Movie(props) {
 }
 
 Movie.propTypes = {
+    id: PropTypes.number.isRequired,
     medium_cover_image: PropTypes.string.isRequired,
     title_long: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
