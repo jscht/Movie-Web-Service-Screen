@@ -68,3 +68,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+참고할 github
+
+https://netflix-gw.netlify.app/movie/top-rated
+css 넷플이랑 거의 흡사.
+https://github.com/GitHubGW?tab=repositories
+
+https://seojunhwan.github.io/gumaflex/#/
+레이아웃 보기 좋음.
+https://github.com/Seojunhwan
